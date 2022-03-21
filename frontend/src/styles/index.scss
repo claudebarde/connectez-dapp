@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import "./settings.scss";
+
+html,
+body,
+#app {
+  padding: 0px;
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Mulish", sans-serif;
+  background-color: $bg-color;
+  color: $black;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: 8% 92%;
+}
+
+h1 {
+  padding: 0px;
+  margin: 0px;
+  font-size: 1.3rem;
+}
