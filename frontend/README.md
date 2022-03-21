@@ -1,1 +1,1 @@
-# Taquito testing with Vitejs
+# ConnecTez frontend dapp
