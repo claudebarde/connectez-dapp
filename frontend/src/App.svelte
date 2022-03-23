@@ -4,16 +4,35 @@
   import { BeaconWallet } from "@taquito/beacon-wallet";
   import { NetworkType } from "@airgap/beacon-sdk";
   import Router from "svelte-spa-router";
-  import Header from "./lib/Header.svelte";
+  import Header from "./lib/header/Header.svelte";
   import Home from "./lib/Home.svelte";
   import Post from "./lib/Post.svelte";
+  import Blog from "./lib/Blog.svelte";
   import CreatePost from "./lib/create-post/CreatePost.svelte";
+  import store from "./store";
+  import config from "./config";
 
   const routes = {
     "/": Home,
+    "/blog": Blog,
     "/post/:id": Post,
     "/create": CreatePost
   };
+
+  onMount(async () => {
+    const rpcUrl = (() => {
+      switch (config.network) {
+        case "mainnet":
+          return "https://mainnet.api.tez.ie";
+        case "testnet":
+          return "https://hangzhounet.api.tez.ie";
+        case "local":
+          return "http://localhost:20000";
+      }
+    })();
+    const tezos = new TezosToolkit(rpcUrl);
+    store.updateTezos(tezos);
+  });
 </script>
 
 <Header />
