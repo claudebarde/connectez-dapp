@@ -31,15 +31,9 @@
 
     .right-block {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-
-      .right-block__settings {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-      }
+      gap: 10px;
     }
   }
 </style>
@@ -48,27 +42,28 @@
   <div class="left-block">ConnecTez</div>
   <div />
   <div class="right-block">
-    <div class="right-block__settings">
-      <a href="#/" class="button-link">
+    <a href="#/" class="button-link">
+      <button class="round">
+        <span class="material-icons-outlined"> home </span>
+      </button>
+    </a>
+    <button class="round">
+      <span class="material-icons-outlined"> light_mode </span>
+    </button>
+    {#if userBlog}
+      <a href={`#/blog/${userBlog}`} class="button-link">
         <button class="round">
-          <span class="material-icons-outlined"> home </span>
+          <span class="material-icons-outlined"> contact_page </span>
         </button>
       </a>
       <button class="round">
-        <span class="material-icons-outlined"> light_mode </span>
+        <span class="material-icons-outlined"> note_add </span>
       </button>
-      {#if userBlog}
-        <a href={`#/blog/${userBlog}`} class="button-link">
-          <button class="round">
-            <span class="material-icons-outlined"> person_outline </span>
-          </button>
-        </a>
-      {:else}
-        <button class="round">
-          <span class="material-icons-outlined"> add_circle_outline </span>
-        </button>
-      {/if}
-    </div>
+    {:else}
+      <button class="round">
+        <span class="material-icons-outlined"> add_circle_outline </span>
+      </button>
+    {/if}
     <Wallet />
   </div>
 </header>

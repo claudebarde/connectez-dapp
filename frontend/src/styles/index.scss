@@ -30,6 +30,16 @@ h1 {
   padding: 0px;
   margin: 0px;
   font-size: 1.3rem;
+
+  &.block-title {
+    padding: $std-padding;
+    margin: 10px;
+    background-color: $tiffany-blue;
+    border-radius: $std-border-radius;
+    color: white;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 a {
@@ -68,6 +78,20 @@ button {
   font-family: "Mulish", sans-serif;
   font-size: 1rem;
   color: $black;
+
+  &.primary {
+    border-radius: $std-border-radius;
+    padding: 0.5rem 1rem;
+    border: solid 2px $cg-blue;
+    background-color: white;
+    color: $cg-blue;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $cg-blue;
+      color: white;
+    }
+  }
 
   &.round {
     $size: 2.5rem;

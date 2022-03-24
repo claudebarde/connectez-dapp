@@ -5,7 +5,7 @@
 <main class="central-container">
   {#if $store.userAddress.isSome()}
     <!-- User is connected -->
-    <div>Welcome back!</div>
+    <h1 class="block-title">Latest blog posts from your list</h1>
   {:else}
     <!-- User is not connected -->
     <div>Create a new blog</div>

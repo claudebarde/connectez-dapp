@@ -84,9 +84,20 @@ const shortenHash = (hash: string): string => {
   return hash.slice(0, 5) + "..." + hash.slice(-5);
 };
 
+/**
+ *
+ * @param {number} amount The amount to format
+ * @param {number} decimals The number of decimals to keep after the floating point
+ * @returns {string} The formatted amount
+ */
+const formatTokenAmount = (amount: number, decimals: number = 6): string => {
+  return (+(amount / 10 ** decimals).toFixed(2) / 1).toLocaleString("en-US");
+};
+
 export default {
   validateAccountAddress,
   validateContractAddress,
   findBlogAddress,
-  shortenHash
+  shortenHash,
+  formatTokenAmount
 };

@@ -6,6 +6,7 @@
     BeaconEvent,
     defaultEventCallbacks
   } from "@airgap/beacon-sdk";
+  import { Option } from "@swan-io/boxed";
   import type { TezosAccountAddress } from "../../types";
   import store from "../../store";
   import config from "../../config";
@@ -41,6 +42,7 @@
         const balance = await tezos.tz.getBalance(userAddress);
         if (balance) {
           userBalance = balance.toNumber();
+          store.updateUserBalance(userBalance);
         }
       }
     });
@@ -81,14 +83,16 @@
     try {
       await wallet.requestPermissions({
         network: {
-          type:
-            config.network === "mainnet"
-              ? NetworkType.MAINNET
-              : NetworkType.HANGZHOUNET,
-          rpcUrl:
-            config.network === "mainnet"
-              ? "https://mainnet.api.tez.ie"
-              : "https://hangzhounet.api.tez.ie"
+          type: (() => {
+            if (config.network === "mainnet") {
+              return NetworkType.MAINNET;
+            } else if (config.network === "testnet") {
+              return NetworkType.HANGZHOUNET;
+            } else {
+              return NetworkType.CUSTOM;
+            }
+          })(),
+          rpcUrl: config.rpcUrls[config.network]
         }
       });
 
@@ -139,6 +143,11 @@
       None: () => (userAddress = undefined),
       Some: val => (userAddress = val)
     });
+    // updates user balance
+    $store.userBalance.match({
+      None: () => (userBalance = undefined),
+      Some: val => (userBalance = val)
+    });
   });
 
   onDestroy(() => {
@@ -156,10 +165,35 @@
 
 <div class="wallet-container">
   {#if userAddress}
-    <button class="wallet" on:click={disconnectWallet}>
+    <button
+      class="wallet"
+      on:click={() => {
+        store.updateDialog(
+          Option.Some({
+            title: "Wallet settings",
+            body: "wallet-settings",
+            buttons: [
+              {
+                type: "disconnect",
+                text: "Disconnect",
+                action: () => {
+                  disconnectWallet();
+                  store.updateDialog(Option.None());
+                }
+              },
+              {
+                type: "close",
+                text: "Close",
+                action: () => store.updateDialog(Option.None())
+              }
+            ]
+          })
+        );
+      }}
+    >
       <span>
         {#if userBalance}
-          {(+(userBalance / 10 ** 6).toFixed(2) / 1).toLocaleString("en-US")} ꜩ
+          {utils.formatTokenAmount(userBalance)} ꜩ
         {:else}
           0 ꜩ
         {/if}

@@ -1,14 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { TezosToolkit } from "@taquito/taquito";
-  import { BeaconWallet } from "@taquito/beacon-wallet";
-  import { NetworkType } from "@airgap/beacon-sdk";
   import Router from "svelte-spa-router";
   import Header from "./lib/header/Header.svelte";
   import Home from "./lib/Home.svelte";
   import Post from "./lib/Post.svelte";
   import Blog from "./lib/Blog.svelte";
   import CreatePost from "./lib/create-post/CreatePost.svelte";
+  import Dialog from "./lib/dialog/Dialog.svelte";
   import store from "./store";
   import config from "./config";
 
@@ -37,3 +36,6 @@
 
 <Header />
 <Router {routes} />
+{#if $store.dialog}
+  <Dialog />
+{/if}
