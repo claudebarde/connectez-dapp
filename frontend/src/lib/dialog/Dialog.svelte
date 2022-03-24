@@ -26,7 +26,7 @@
       left: 0px;
       width: 100vw;
       height: 100vh;
-      background-color: rgba($black, 0.3);
+      background-color: rgba($black, 0.4);
       z-index: 201;
     }
 
