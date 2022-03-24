@@ -17,16 +17,25 @@
 
 <style lang="scss">
   @import "../../styles/settings.scss";
+  $padding: 20px;
 
   header {
-    padding: 20px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 0px $padding;
     width: calc(100% - 40px);
+    height: 10%;
     display: grid;
     grid-template-columns: 20% 40% 40%;
     align-items: center;
+    background-color: rgba($floral-white, 0.6);
+    backdrop-filter: blur(10px);
 
     .left-block {
       text-align: center;
+      font-family: "Pacifico", cursive;
+      font-size: 1.8rem;
     }
 
     .right-block {
@@ -36,8 +45,15 @@
       gap: 10px;
     }
   }
+
+  #header-placeholder {
+    padding: 0px $padding;
+    width: calc(100% - 40px);
+    height: 100%;
+  }
 </style>
 
+<div id="header-placeholder" />
 <header>
   <div class="left-block">ConnecTez</div>
   <div />

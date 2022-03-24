@@ -109,7 +109,7 @@
               {button.text}
             </button>
           {:else if button.type === "disconnect"}
-            <button class="primary" on:click={button.action}>
+            <button class="error" on:click={button.action}>
               {button.text}
             </button>
           {/if}

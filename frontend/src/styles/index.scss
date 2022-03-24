@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,700&family=Pacifico&display=swap");
 @import "./settings.scss";
 
 html,
@@ -17,7 +17,7 @@ body,
 
 #app {
   display: grid;
-  grid-template-rows: 8% 92%;
+  grid-template-rows: 10% 90%;
 }
 
 .material-icons,
@@ -79,16 +79,47 @@ button {
   font-size: 1rem;
   color: $black;
 
-  &.primary {
+  @mixin basic-button {
     border-radius: $std-border-radius;
+    border-style: solid;
+    border-width: 2px;
     padding: 0.5rem 1rem;
-    border: solid 2px $cg-blue;
     background-color: white;
-    color: $cg-blue;
     transition: 0.3s;
+  }
+
+  &.primary {
+    @include basic-button;
+    $color: $cg-blue;
+    border-color: $color;
+    color: $color;
 
     &:hover {
-      background-color: $cg-blue;
+      background-color: $color;
+      color: white;
+    }
+  }
+
+  &.warning {
+    @include basic-button;
+    $color: $maximum-yellow-red;
+    border-color: $color;
+    color: $color;
+
+    &:hover {
+      background-color: $color;
+      color: white;
+    }
+  }
+
+  &.error {
+    @include basic-button;
+    $color: $light-coral;
+    border-color: $color;
+    color: $color;
+
+    &:hover {
+      background-color: $color;
       color: white;
     }
   }
