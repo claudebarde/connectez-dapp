@@ -56,8 +56,14 @@
     display: grid;
     grid-template-columns: 20% 40% 40%;
     align-items: center;
-    background-color: rgba($floral-white, 0.6);
-    backdrop-filter: blur(10px);
+    &.light {
+      background-color: rgba($floral-white, 0.6);
+      backdrop-filter: blur(10px);
+    }
+    &.dark {
+      background-color: rgba($black, 0.6);
+      backdrop-filter: blur(10px);
+    }
 
     .left-block {
       text-align: center;
@@ -81,24 +87,39 @@
 </style>
 
 <div id="header-placeholder" />
-<header>
+<header
+  class:light={$store.theme === "light"}
+  class:dark={$store.theme === "dark"}
+>
   <div class="left-block">ConnecTez</div>
   <div />
   <div class="right-block">
     <a href="#/" class="button-link">
-      <button class="round">
+      <button
+        class="round"
+        class:light={$store.theme === "light"}
+        class:dark={$store.theme === "dark"}
+      >
         <span class="material-icons-outlined"> home </span>
       </button>
     </a>
     <button
       id="header__theme_button"
       class="round"
+      class:light={$store.theme === "light"}
+      class:dark={$store.theme === "dark"}
       on:mouseenter={() => showPopper(themePopper, themePopperInstance)}
       on:mouseleave={() => hidePopper(themePopper)}
       on:focus={() => showPopper(themePopper, themePopperInstance)}
       on:blur={() => hidePopper(themePopper)}
+      on:click={() =>
+        store.updateTheme($store.theme === "light" ? "dark" : "light")}
     >
-      <span class="material-icons-outlined"> light_mode </span>
+      {#if $store.theme === "light"}
+        <span class="material-icons-outlined"> dark_mode </span>
+      {:else}
+        <span class="material-icons-outlined"> light_mode </span>
+      {/if}
     </button>
     <div id="header__theme_button__tooltip" class="tooltip" role="tooltip">
       Light/Dark theme
@@ -106,24 +127,36 @@
     </div>
     {#if userBlog}
       <a href={`#/blog/${userBlog}`} class="button-link">
-        <button class="round">
+        <button
+          class="round"
+          class:light={$store.theme === "light"}
+          class:dark={$store.theme === "dark"}
+        >
           <span class="material-icons-outlined"> contact_page </span>
         </button>
       </a>
-      <button class="round">
+      <button
+        class="round"
+        class:light={$store.theme === "light"}
+        class:dark={$store.theme === "dark"}
+      >
         <span class="material-icons-outlined"> note_add </span>
       </button>
     {:else}
-      <button
-        id="header__new_blog_button"
-        class="round"
-        on:mouseenter={() => showPopper(newBlogPopper, newBlogPopperInstance)}
-        on:mouseleave={() => hidePopper(newBlogPopper)}
-        on:focus={() => showPopper(newBlogPopper, newBlogPopperInstance)}
-        on:blur={() => hidePopper(newBlogPopper)}
-      >
-        <span class="material-icons-outlined"> add_circle_outline </span>
-      </button>
+      <a href="#/blog" class="button-link">
+        <button
+          id="header__new_blog_button"
+          class="round"
+          class:light={$store.theme === "light"}
+          class:dark={$store.theme === "dark"}
+          on:mouseenter={() => showPopper(newBlogPopper, newBlogPopperInstance)}
+          on:mouseleave={() => hidePopper(newBlogPopper)}
+          on:focus={() => showPopper(newBlogPopper, newBlogPopperInstance)}
+          on:blur={() => hidePopper(newBlogPopper)}
+        >
+          <span class="material-icons-outlined"> add_circle_outline </span>
+        </button>
+      </a>
       <div id="header__new_blog_button__tooltip" class="tooltip" role="tooltip">
         Create a new blog
         <div class="tooltip-arrow" data-popper-arrow />

@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 import type { TezosToolkit } from "@taquito/taquito";
+import { BeaconWallet } from "@taquito/beacon-wallet";
 import { Option } from "@swan-io/boxed";
 import type {
   State,
@@ -11,11 +12,13 @@ import utils from "./utils";
 
 const initialState: State = {
   Tezos: Option.None(),
+  wallet: Option.None(),
   userAddress: Option.None(),
   userBalance: Option.None(),
   userCnctBalance: Option.None(),
   userBlog: Option.None(),
-  dialog: undefined
+  dialog: undefined,
+  theme: "light"
 };
 
 const store = writable(initialState);
@@ -24,6 +27,14 @@ const state = {
   subscribe: store.subscribe,
   updateTezos: (tezos: TezosToolkit) =>
     store.update(store => ({ ...store, Tezos: Option.fromNullable(tezos) })),
+  updateWallet: (wallet: any) =>
+    store.update(store => {
+      if (!wallet || wallet instanceof BeaconWallet === false) {
+        return { ...store, wallet: Option.None() };
+      }
+
+      return { ...store, wallet: Option.Some(wallet) };
+    }),
   updateUserAddress: (address: any) =>
     store.update(store => {
       // if address is false or of the wrong format
@@ -71,7 +82,19 @@ const state = {
         Some: dialog => dialog,
         None: () => undefined
       })
-    }))
+    })),
+  updateTheme: (theme: State["theme"]) =>
+    store.update(store => {
+      if (theme === "light") {
+        document.body.classList.remove("dark-theme");
+        document.body.classList.add("light-theme");
+      } else {
+        document.body.classList.remove("light-theme");
+        document.body.classList.add("dark-theme");
+      }
+
+      return { ...store, theme };
+    })
 };
 
 export default state;

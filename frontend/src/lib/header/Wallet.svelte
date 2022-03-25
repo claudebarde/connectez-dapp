@@ -78,6 +78,7 @@
   const connectWallet = async () => {
     if (!wallet) {
       wallet = new BeaconWallet(walletOptions);
+      store.updateWallet(wallet);
     }
 
     try {
@@ -125,6 +126,7 @@
     wallet = new BeaconWallet(walletOptions);
     const activeAccount = await wallet.client.getActiveAccount();
     if (activeAccount) {
+      store.updateWallet(wallet);
       const userAddress = (await wallet.getPKH()) as TezosAccountAddress;
       store.updateUserAddress(userAddress);
       await findUserBlog(userAddress);
@@ -167,6 +169,8 @@
   {#if userAddress}
     <button
       class="wallet"
+      class:light={$store.theme === "light"}
+      class:dark={$store.theme === "dark"}
       on:click={() => {
         store.updateDialog(
           Option.Some({

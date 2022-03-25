@@ -1,4 +1,5 @@
 import type { TezosToolkit } from "@taquito/taquito";
+import type { BeaconWallet } from "@taquito/beacon-wallet";
 import type { Option } from "@swan-io/boxed";
 
 export type TezosContractAddress = `KT1${string}`;
@@ -15,9 +16,11 @@ export type Dialog = {
 };
 export interface State {
   Tezos: Option<TezosToolkit>;
+  wallet: Option<BeaconWallet>;
   userAddress: Option<TezosAccountAddress>;
   userBalance: Option<number>;
   userCnctBalance: Option<number>;
   userBlog: Option<TezosContractAddress>;
   dialog: Dialog | undefined;
+  theme: "light" | "dark";
 }

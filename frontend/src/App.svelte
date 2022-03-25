@@ -13,7 +13,7 @@
 
   const routes = {
     "/": Home,
-    "/blog": Blog,
+    "/blog/:address?": Blog,
     "/post/:id": Post,
     "/create": CreatePost
   };

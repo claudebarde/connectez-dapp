@@ -31,7 +31,7 @@
     }
 
     #dialog {
-      width: 35%;
+      width: 40%;
       min-height: 15%;
       background-color: white;
       border-radius: 10px;
@@ -46,6 +46,7 @@
       box-shadow: 5px 5px 18px 0px rgba(0, 0, 0, 0.3);
       font-size: 1.1rem;
       z-index: 202;
+      color: $black;
 
       #dialog-title {
         font-weight: bold;
@@ -54,6 +55,12 @@
       #dialog-body {
         & > div {
           margin: 10px;
+        }
+
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+          vertical-align: middle;
         }
       }
     }
@@ -72,15 +79,29 @@
       <div id="dialog-body">
         {#if $store.dialog.body === "wallet-settings"}
           <div>
+            {#await $store.wallet.match( { None: () => Promise.resolve(""), Some: async wallet => {
+                  const peers = await wallet.client.getPeers();
+                  if (peers && Array.isArray(peers) && peers.length > 0) {
+                    return peers[0].icon;
+                  } else {
+                    return "";
+                  }
+                } } )}
+              <span class="material-icons-outlined">
+                account_balance_wallet
+              </span>
+            {:then walletUrl}
+              <img src={walletUrl} alt="wallet-icon" />
+            {/await}
             {$store.userAddress.match({
               None: () => "No user address",
               Some: addr => {
-                return "Connected as " + addr;
+                return addr;
               }
             })}
           </div>
           <div>
-            RPC URL: {config.rpcUrls[config.network]}
+            RPC URL: {config.rpcUrls[config.network]} ({config.network})
           </div>
           <div>
             XTZ balance: {$store.userBalance.match({

@@ -10,20 +10,27 @@ body,
   height: 100vh;
   font-family: "Mulish", sans-serif;
   font-size: 1.1rem;
-  color: $black;
   line-height: 28px;
-  background-color: $bg-color;
+
+  .material-icons,
+  .material-icons-outlined {
+    font-size: 1.5rem;
+  }
+
+  &.light-theme {
+    color: $black;
+    background-color: $bg-color;
+  }
+
+  &.dark-theme {
+    color: white;
+    background-color: $black;
+  }
 }
 
 #app {
   display: grid;
   grid-template-rows: 10% 90%;
-}
-
-.material-icons,
-.material-icons-outlined {
-  color: $black;
-  font-size: 1.5rem;
 }
 
 h1 {
@@ -78,6 +85,17 @@ button {
   font-family: "Mulish", sans-serif;
   font-size: 1rem;
   color: $black;
+
+  span.material-icons-outlined {
+    vertical-align: middle;
+  }
+
+  &.light span.material-icons-outlined {
+    color: $black;
+  }
+  &.dark span.material-icons-outlined {
+    color: white;
+  }
 
   @mixin basic-button {
     border-radius: $std-border-radius;
@@ -134,8 +152,11 @@ button {
     border: none;
     transition: 0.3s;
 
-    &:hover {
+    &.light:hover {
       background-color: darken($bg-color, 10);
+    }
+    &.dark:hover {
+      background-color: lighten($black, 10);
     }
   }
 
@@ -160,8 +181,11 @@ button {
       padding-left: 5px;
     }
 
-    span.material-icons-outlined {
-      vertical-align: middle;
+    &.light {
+      color: $black;
+    }
+    &.dark {
+      color: white;
     }
   }
 }
