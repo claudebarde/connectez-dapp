@@ -37,6 +37,7 @@ h1 {
   padding: 0px;
   margin: 0px;
   font-size: 1.3rem;
+  text-align: center;
 
   &.block-title {
     padding: $std-padding;
@@ -45,7 +46,6 @@ h1 {
     border-radius: $std-border-radius;
     color: white;
     width: 100%;
-    text-align: center;
   }
 }
 
@@ -65,6 +65,10 @@ main {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    & > div {
+      margin: 10px 0px;
+    }
   }
 }
 
@@ -190,13 +194,35 @@ button {
   }
 }
 
+input[type="text"] {
+  background-color: darken($bg-color, 10);
+  border: solid 2px transparent;
+  border-radius: $std-border-radius;
+  padding: 10px;
+  outline: none;
+  font-size: 1rem;
+  font-family: "Mulish", sans-serif;
+  color: $black;
+
+  &:focus {
+    border-color: $maximum-yellow-red;
+  }
+}
+
 .tooltip {
-  background-color: $black;
-  color: white;
   display: none;
   padding: 0px 5px;
   border-radius: $std-border-radius;
   font-size: 0.8rem;
+
+  &.light {
+    background-color: $black;
+    color: white;
+  }
+  &.dark {
+    background-color: white;
+    color: $black;
+  }
 }
 
 .tooltip-arrow,

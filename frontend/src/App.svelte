@@ -7,6 +7,7 @@
   import Post from "./lib/Post.svelte";
   import Blog from "./lib/Blog.svelte";
   import CreatePost from "./lib/create-post/CreatePost.svelte";
+  import CreateNewBlog from "./lib/CreateNewBlog.svelte";
   import Dialog from "./lib/dialog/Dialog.svelte";
   import store from "./store";
   import config from "./config";
@@ -15,7 +16,8 @@
     "/": Home,
     "/blog/:address?": Blog,
     "/post/:id": Post,
-    "/create": CreatePost
+    "/new-post": CreatePost,
+    "/create-new-blog": CreateNewBlog
   };
 
   onMount(async () => {

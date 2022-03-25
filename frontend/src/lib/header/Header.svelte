@@ -121,7 +121,13 @@
         <span class="material-icons-outlined"> light_mode </span>
       {/if}
     </button>
-    <div id="header__theme_button__tooltip" class="tooltip" role="tooltip">
+    <div
+      id="header__theme_button__tooltip"
+      class="tooltip"
+      class:light={$store.theme === "light"}
+      class:dark={$store.theme === "dark"}
+      role="tooltip"
+    >
       Light/Dark theme
       <div class="tooltip-arrow" data-popper-arrow />
     </div>
@@ -143,7 +149,7 @@
         <span class="material-icons-outlined"> note_add </span>
       </button>
     {:else}
-      <a href="#/blog" class="button-link">
+      <a href="#/create-new-blog" class="button-link">
         <button
           id="header__new_blog_button"
           class="round"
@@ -157,7 +163,13 @@
           <span class="material-icons-outlined"> add_circle_outline </span>
         </button>
       </a>
-      <div id="header__new_blog_button__tooltip" class="tooltip" role="tooltip">
+      <div
+        id="header__new_blog_button__tooltip"
+        class="tooltip"
+        class:light={$store.theme === "light"}
+        class:dark={$store.theme === "dark"}
+        role="tooltip"
+      >
         Create a new blog
         <div class="tooltip-arrow" data-popper-arrow />
       </div>
