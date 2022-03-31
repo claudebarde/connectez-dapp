@@ -58,6 +58,10 @@ a {
 main {
   height: 100%;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   &.central-container {
     width: 50%;
     margin: 0 auto;
@@ -70,6 +74,10 @@ main {
       margin: 10px 0px;
     }
   }
+
+  footer {
+    min-height: 100px;
+  }
 }
 
 .buttons {
@@ -77,6 +85,10 @@ main {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+}
+
+span.material-icons-outlined {
+  vertical-align: middle;
 }
 
 button {
@@ -89,10 +101,6 @@ button {
   font-family: "Mulish", sans-serif;
   font-size: 1rem;
   color: $black;
-
-  span.material-icons-outlined {
-    vertical-align: middle;
-  }
 
   &.light span.material-icons-outlined {
     color: $black;
@@ -113,12 +121,26 @@ button {
   &.primary {
     @include basic-button;
     $color: $cg-blue;
-    border-color: $color;
-    color: $color;
 
-    &:hover {
-      background-color: $color;
+    &.light {
+      border-color: $color;
+      color: $color;
+
+      &:hover {
+        background-color: $color;
+        color: white;
+      }
+    }
+
+    &.dark {
       color: white;
+      background-color: $color;
+      border-color: $color;
+
+      &:hover {
+        background-color: lighten($color, 10);
+        border-color: lighten($color, 10);
+      }
     }
   }
 
@@ -194,7 +216,8 @@ button {
   }
 }
 
-input[type="text"] {
+input[type="text"],
+textarea {
   background-color: darken($bg-color, 10);
   border: solid 2px transparent;
   border-radius: $std-border-radius;
@@ -207,6 +230,13 @@ input[type="text"] {
   &:focus {
     border-color: $maximum-yellow-red;
   }
+  &.error:focus {
+    border-color: $light-coral;
+  }
+}
+
+textarea {
+  resize: vertical;
 }
 
 .tooltip {

@@ -79,41 +79,45 @@
       <div id="dialog-body">
         {#if $store.dialog.body === "wallet-settings"}
           <div>
-            {#await $store.wallet.match( { None: () => Promise.resolve(""), Some: async wallet => {
-                  const peers = await wallet.client.getPeers();
-                  if (peers && Array.isArray(peers) && peers.length > 0) {
-                    return peers[0].icon;
-                  } else {
-                    return "";
-                  }
-                } } )}
-              <span class="material-icons-outlined">
-                account_balance_wallet
-              </span>
-            {:then walletUrl}
-              <img src={walletUrl} alt="wallet-icon" />
-            {/await}
-            {$store.userAddress.match({
-              None: () => "No user address",
-              Some: addr => {
-                return addr;
-              }
-            })}
+            <span class="material-icons-outlined">
+              account_balance_wallet
+            </span>
+            &nbsp;
+            <span>
+              {$store.userAddress.match({
+                None: () => "No user address",
+                Some: addr => {
+                  return addr;
+                }
+              })}
+            </span>
           </div>
           <div>
-            RPC URL: {config.rpcUrls[config.network]} ({config.network})
+            <span class="material-icons-outlined"> dns </span>
+            &nbsp;
+            <span>
+              RPC URL: {config.rpcUrls[config.network]} ({config.network})
+            </span>
           </div>
           <div>
-            XTZ balance: {$store.userBalance.match({
-              None: () => "No balance",
-              Some: blnc => utils.formatTokenAmount(blnc) + " ꜩ"
-            })}
+            <span class="material-icons-outlined"> savings </span>
+            &nbsp;
+            <span>
+              XTZ balance: {$store.userBalance.match({
+                None: () => "No balance",
+                Some: blnc => utils.formatTokenAmount(blnc) + " ꜩ"
+              })}
+            </span>
           </div>
           <div>
-            CNCT balance: {$store.userCnctBalance.match({
-              None: () => "No balance",
-              Some: blnc => utils.formatTokenAmount(blnc) + " CNCT"
-            })}
+            <span class="material-icons-outlined"> toll </span>
+            &nbsp;
+            <span>
+              CNCT balance: {$store.userCnctBalance.match({
+                None: () => "No balance",
+                Some: blnc => utils.formatTokenAmount(blnc) + " CNCT"
+              })}
+            </span>
           </div>
         {:else}
           {@html $store.dialog.body}
@@ -122,7 +126,7 @@
       <div id="dialog-buttons" class="buttons">
         {#each $store.dialog.buttons as button}
           {#if button.type === "close"}
-            <button class="primary" on:click={button.action}>
+            <button class="primary light" on:click={button.action}>
               {button.text}
             </button>
           {:else if button.type === "confirm"}

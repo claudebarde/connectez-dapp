@@ -25,7 +25,7 @@ const config: Config = {
   mainContract: {
     mainnet: "KT1B6MrLEiZtyRJniwnvAUN63j7M7SVegtwh",
     testnet: "KT1B6MrLEiZtyRJniwnvAUN63j7M7SVegtwh",
-    local: "KT1B6MrLEiZtyRJniwnvAUN63j7M7SVegtwh"
+    local: "KT1JCSNUwXF5Re2Kf1QLc3NXpNc8Nt1vdamT"
   }
 };
 

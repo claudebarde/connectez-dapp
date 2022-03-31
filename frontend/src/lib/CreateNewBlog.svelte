@@ -1,7 +1,10 @@
 <script lang="ts">
   import { afterUpdate } from "svelte";
   import { push } from "svelte-spa-router";
+  import { char2Bytes } from "@taquito/utils";
   import store from "../store";
+
+  let descriptionError = false;
 
   afterUpdate(() => {
     // user cannot create a new blog if he already has one
@@ -22,8 +25,9 @@
     align-items: center;
     border: solid 2px darken($bg-color, 10);
     border-radius: $std-border-radius;
-    width: 100%;
+    width: 90%;
     padding: 20px;
+    margin: 5px;
 
     & > div {
       margin: 10px 0px;
@@ -61,11 +65,27 @@
         <input type="text" id="blog-name" style="width:50%;" />
       </div>
       <div>
-        <label for="blogger-birthday">*Date of birth:</label>
+        <label for="blog-description">Describe your blog in a few words:</label>
+        <textarea
+          id="blog-description"
+          class:error={descriptionError}
+          style="width:70%;"
+          rows="3"
+          on:input={ev => {
+            if (char2Bytes(ev.target.value).length > 200) {
+              descriptionError = true;
+            } else {
+              descriptionError = false;
+            }
+          }}
+        />
+      </div>
+      <div>
+        <label for="blogger-birthday">Date of birth (optional):</label>
         <input type="text" id="blogger-birthday" />
       </div>
       <div>
-        <label for="blogger-location">*Location:</label>
+        <label for="blogger-location">*Location (optional):</label>
         <input type="text" id="blogger-location" />
       </div>
       <div>
@@ -79,4 +99,5 @@
       </div>
     </div>
   {/if}
+  <footer>&nbsp;</footer>
 </main>

@@ -57,4 +57,5 @@
     <div>Create a new blog</div>
     <div>Browse blogs</div>
   {/if}
+  <footer>&nbsp;</footer>
 </main>

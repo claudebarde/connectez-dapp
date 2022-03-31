@@ -66,9 +66,15 @@
     }
 
     .left-block {
-      text-align: center;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       font-family: "Pacifico", cursive;
       font-size: 1.8rem;
+
+      img {
+        width: 50px;
+      }
     }
 
     .right-block {
@@ -91,7 +97,10 @@
   class:light={$store.theme === "light"}
   class:dark={$store.theme === "dark"}
 >
-  <div class="left-block">ConnecTez</div>
+  <div class="left-block">
+    <img src="quill-logo.png" alt="quill-logo" />
+    <div>ConnecTez</div>
+  </div>
   <div />
   <div class="right-block">
     <a href="#/" class="button-link">
