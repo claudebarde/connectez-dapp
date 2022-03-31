@@ -142,6 +142,11 @@ button {
         border-color: lighten($color, 10);
       }
     }
+
+    span.material-icons,
+    span.material-icons-outlined {
+      color: inherit;
+    }
   }
 
   &.warning {
