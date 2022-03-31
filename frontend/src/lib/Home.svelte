@@ -9,7 +9,14 @@
     grid-template-columns: 1fr 1fr;
     padding: 20px;
     grid-gap: 60px;
-    align-items: center;
+    align-items: stretch;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
 
     img {
       width: 40vw;
@@ -101,15 +108,34 @@
           alt="girl-laptop"
         />
       </div>
+      <div>
+        <img
+          src="vecteezy-illustration-graphic-cartoon-character-of-female-writer-vector.jpeg"
+          alt="create-blog"
+        />
+      </div>
+      <div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <a href="#/create-new-blog" class="button-link">
+          <button
+            class="primary"
+            class:light={$store.theme === "light"}
+            class:dark={$store.theme === "dark"}
+          >
+            <span class="material-icons-outlined"> add_circle_outline </span>
+            &nbsp; Create a new blog
+          </button></a
+        >
+      </div>
     </div>
-    <button
-      class="primary"
-      class:light={$store.theme === "light"}
-      class:dark={$store.theme === "dark"}
-    >
-      <span class="material-icons-outlined"> add_circle_outline </span>
-      &nbsp; Create a new blog
-    </button>
     <div>Browse blogs</div>
   {/if}
   <footer>&nbsp;</footer>
