@@ -74,6 +74,13 @@
 
       img {
         width: 50px;
+        padding: 5px;
+        margin-right: 10px;
+
+        &.dark {
+          background-color: white;
+          border-radius: 50%;
+        }
       }
     }
 
@@ -98,7 +105,11 @@
   class:dark={$store.theme === "dark"}
 >
   <div class="left-block">
-    <img src="quill-logo.png" alt="quill-logo" />
+    <img
+      class:dark={$store.theme === "dark"}
+      src="quill-logo.png"
+      alt="quill-logo"
+    />
     <div>ConnecTez</div>
   </div>
   <div />
